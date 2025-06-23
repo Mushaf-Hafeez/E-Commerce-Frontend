@@ -13,7 +13,11 @@ import {
 } from "../components/ui/select";
 
 import { useForm, Controller } from "react-hook-form";
-import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import { setSignupData } from "../redux/slices/authSlice";
+import { useDispatch } from "react-redux";
+import { sendOTP } from "../services/auth";
 
 const Signup = () => {
   const {
@@ -23,11 +27,21 @@ const Signup = () => {
     formState: { errors },
     reset,
   } = useForm();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   //   onSubmit function
-  const onSubmit = (data) => {
-    console.log("login data is: ", data);
-    reset();
+  const onSubmit = async (data) => {
+    // console.log("login data is: ", data);
+    dispatch(setSignupData(data));
+    const response = await sendOTP(data.email);
+    if (response.success) {
+      toast.success(response.message);
+      reset();
+      navigate("/otp-verification");
+    } else {
+      toast.error("Please try again");
+    }
   };
 
   return (
