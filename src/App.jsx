@@ -7,6 +7,8 @@ import Errorpage from "./pages/Errorpage";
 import Authpage from "./pages/Authpage";
 import Products from "./pages/Products";
 import OTP from "./pages/OTP";
+import ForgotPasswordpage from "./pages/ForgotPasswordpage";
+import ResetPasswordpage from "./pages/ResetPasswordpage";
 
 const App = () => {
   return (
@@ -19,7 +21,9 @@ const App = () => {
         <Route path="/products" element={<Products />} />
         <Route path="/login" element={<Authpage />} />
         <Route path="/signup" element={<Authpage />} />
-        <Route path="//otp-verification" element={<OTP />} />
+        <Route path="/otp-verification" element={<OTP />} />
+        <Route path="/forgot-password" element={<ForgotPasswordpage />} />
+        <Route path="/reset-password/:id" element={<ResetPasswordpage />} />
         <Route path="*" element={<Errorpage />} />
       </Routes>
     </main>

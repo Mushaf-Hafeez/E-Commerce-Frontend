@@ -85,6 +85,9 @@ const Login = () => {
               placeholder="Enter your password"
               {...register("password", { required: true, minLength: 8 })}
             />
+            <Link to={"/forgot-password"} className="text-primary text-sm">
+              Forgot password?
+            </Link>
             <Button type="submit" className={"cursor-pointer"}>
               Login
             </Button>

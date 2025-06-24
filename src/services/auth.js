@@ -51,3 +51,17 @@ export const logout = async () => {
     return error.response.data;
   }
 };
+
+// the forgot password link function
+export const sendForgotPasswordLink = async (email) => {
+  try {
+    const { data } = await api.post("/auth/sendForgotPasswordLink", { email });
+    return data;
+  } catch (error) {
+    console.log(
+      "Error in the forgot password link axios function: ",
+      error.response
+    );
+    return error.response.data;
+  }
+};
