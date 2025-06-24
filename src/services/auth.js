@@ -40,3 +40,14 @@ export const login = async (userInfo) => {
     return error.response.data;
   }
 };
+
+// the logout function
+export const logout = async () => {
+  try {
+    const { data } = await api.get("/auth/logout");
+    return data;
+  } catch (error) {
+    console.log("Error in the logout axios function: ", error.response);
+    return error.response.data;
+  }
+};

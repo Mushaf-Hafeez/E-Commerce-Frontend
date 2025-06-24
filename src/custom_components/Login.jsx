@@ -29,7 +29,6 @@ const Login = () => {
 
   //   onSubmit function
   const onSubmit = async (data) => {
-    // Todo: store the data in a state and call the sendOTP api from the backend and then redirect the user to the opt-input page
     const response = await login(data);
     if (response.success) {
       dispatch(setIsAuthenticated(response.success));

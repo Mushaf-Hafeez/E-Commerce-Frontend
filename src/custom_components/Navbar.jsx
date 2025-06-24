@@ -1,13 +1,44 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "../components/ui/avatar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ShoppingCart } from "lucide-react";
 import { ToggleButton } from "./ToggleButton";
+import { logout } from "../services/auth";
+import toast from "react-hot-toast";
+
+import { setIsAuthenticated } from "../redux/slices/authSlice";
+import {
+  setName,
+  setEmail,
+  setProfilePic,
+  setRole,
+} from "../redux/slices/profileSlice";
 
 const Navbar = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
   const { name, profilePic } = useSelector((state) => state.profile);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // logout function
+  const handleClick = async () => {
+    const response = await logout();
+    if (response.success) {
+      console.log(response);
+      localStorage.clear();
+      dispatch(setIsAuthenticated(null));
+      dispatch(setName(null));
+      dispatch(setEmail(null));
+      dispatch(setProfilePic(null));
+      dispatch(setRole(null));
+      toast.success(response.message);
+      navigate("/");
+    } else {
+      toast.error(response.message);
+    }
+  };
 
   return (
     <nav className="relative flex item-center justify-between px-8 md:px-16 lg:px-24 py-4 shadow-lg">
@@ -28,10 +59,28 @@ const Navbar = () => {
             <Link to={"/addToCart"}>
               <ShoppingCart size={"18"} />
             </Link>
-            <Avatar>
-              <AvatarImage src={profilePic} />
-              <AvatarFallback>{name.slice(0, 1).toUpperCase()}</AvatarFallback>
-            </Avatar>
+            <div className="relative group">
+              <Avatar className={"cursor-pointer"}>
+                <AvatarImage src={profilePic} />
+                <AvatarFallback>
+                  {name.slice(0, 1).toUpperCase()}
+                </AvatarFallback>
+              </Avatar>
+              <div className="absolute -left-5 py-2 bg-zinc-100 dark:bg-zinc-900 text-sm hidden group-hover:flex flex-col gap-1 items-start rounded-md shadow-md">
+                <Link
+                  className="px-2 py-1 hover:bg-zinc-200 dark:hover:bg-zinc-800"
+                  to={"/dashboard"}
+                >
+                  Dashboard
+                </Link>
+                <button
+                  className="w-full px-2 py-1 cursor-pointer hover:bg-zinc-200 dark:hover:bg-zinc-800"
+                  onClick={handleClick}
+                >
+                  Logout
+                </button>
+              </div>
+            </div>
           </div>
         ) : (
           <Button className={"rounded-full "} asChild>

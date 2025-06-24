@@ -12,7 +12,12 @@ createRoot(document.getElementById("root")).render(
     <Provider store={store}>
       <BrowserRouter>
         <App />
-        <Toaster />
+        <Toaster
+          toastOptions={{
+            className:
+              "!bg-zinc-100 !text-black dark:!bg-zinc-900 dark:!text-white",
+          }}
+        />
       </BrowserRouter>
     </Provider>
   </ThemeProvider>
