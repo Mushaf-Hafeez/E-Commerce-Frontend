@@ -40,7 +40,7 @@ const Signup = () => {
       reset();
       navigate("/otp-verification");
     } else {
-      toast.error("Please try again");
+      toast.error(response.message);
     }
   };
 

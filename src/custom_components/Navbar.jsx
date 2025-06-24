@@ -7,6 +7,7 @@ import { ToggleButton } from "./ToggleButton";
 
 const Navbar = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
+  const { name, profilePic } = useSelector((state) => state.profile);
 
   return (
     <nav className="relative flex item-center justify-between px-8 md:px-16 lg:px-24 py-4 shadow-lg">
@@ -28,8 +29,8 @@ const Navbar = () => {
               <ShoppingCart size={"18"} />
             </Link>
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarImage src={profilePic} />
+              <AvatarFallback>{name.slice(0, 1).toUpperCase()}</AvatarFallback>
             </Avatar>
           </div>
         ) : (

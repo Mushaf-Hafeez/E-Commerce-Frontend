@@ -4,7 +4,17 @@ import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
 
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { setIsAuthenticated } from "../redux/slices/authSlice";
+import {
+  setEmail,
+  setName,
+  setProfilePic,
+  setRole,
+} from "../redux/slices/profileSlice";
+import { useDispatch } from "react-redux";
+import { login } from "../services/auth";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const {
@@ -14,11 +24,35 @@ const Login = () => {
     reset,
   } = useForm();
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   //   onSubmit function
-  const onSubmit = (data) => {
-    console.log("login data is: ", data);
+  const onSubmit = async (data) => {
     // Todo: store the data in a state and call the sendOTP api from the backend and then redirect the user to the opt-input page
-    reset();
+    const response = await login(data);
+    if (response.success) {
+      dispatch(setIsAuthenticated(response.success));
+      dispatch(setName(response.user.name));
+      dispatch(setEmail(response.user.email));
+      dispatch(setProfilePic(response.user?.profilePic));
+      dispatch(setRole(response.user.role));
+      localStorage.setItem("isAuthenticated", JSON.stringify(response.success));
+      localStorage.setItem("name", JSON.stringify(response.user.name));
+      localStorage.setItem("email", JSON.stringify(response.user.email));
+      if (response.user?.profilePic) {
+        localStorage.setItem(
+          "profilePic",
+          JSON.stringify(response.user?.profilePic)
+        );
+      }
+      localStorage.setItem("role", JSON.stringify(response.user.role));
+      reset();
+      toast.success(response.message);
+      navigate("/");
+    } else {
+      toast.error(response.message);
+    }
   };
 
   return (
