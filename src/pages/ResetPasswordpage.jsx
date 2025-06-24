@@ -1,16 +1,12 @@
-import {
-  Card,
-  CardHeader,
-  CardFooter,
-  CardContent,
-} from "../components/ui/card";
+import { Card, CardHeader, CardContent } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
+import { resetPassword } from "../services/auth";
 
 const ResetPasswordpage = () => {
   const {
@@ -22,6 +18,23 @@ const ResetPasswordpage = () => {
 
   const navigate = useNavigate();
 
+  const { id } = useParams();
+
+  // onSubmit function
+  const onSubmit = async (data) => {
+    const response = await resetPassword(id, {
+      password: data.password,
+      confirmPassword: data.confirmPassword,
+    });
+    if (response.success) {
+      toast.success(response.message);
+      reset();
+      navigate("/login");
+    } else {
+      toast.error(response.message);
+    }
+  };
+
   return (
     <div className="h-[90vh] w-full flex items-center justify-center">
       <Card className="shadow-xl w-8/12 sm:w-6/12 md:w-4/12 lg:w-3/12">
@@ -32,28 +45,34 @@ const ResetPasswordpage = () => {
             </h3>
           </CardHeader>
           <CardContent className={"flex flex-col gap-2"}>
-            <Label htmlFor={"email"}>Email</Label>
+            <Label htmlFor={"password"}>Password</Label>
             <Input
-              type="email"
-              id="email"
-              placeholder="Enter your email"
-              {...register("email", { required: true })}
+              type="password"
+              id="password"
+              placeholder="Enter password"
+              {...register("password", { required: true, minLength: 8 })}
+            />
+            <Label htmlFor={"confirmPassword"}>Confirm password</Label>
+            <Input
+              type="password"
+              id="confirmPassword"
+              placeholder="Enter confirm password"
+              {...register("confirmPassword", { required: true, minLength: 8 })}
             />
             <Button type="submit" className={"cursor-pointer"}>
               Submit
             </Button>
-            {errors.email && (
-              <span className="text-red-800 text-xs">Invalid email.</span>
+            {errors.password && (
+              <span className="text-red-800 text-xs">
+                Password must be of atleast 8 characters
+              </span>
+            )}
+            {errors.confirmPassword && (
+              <span className="text-red-800 text-xs">
+                Password must be of atleast 8 characters
+              </span>
             )}
           </CardContent>
-          <CardFooter>
-            <Link
-              to={-1}
-              className="flex items-center cursor-pointer text-sm mt-2 text-primary"
-            >
-              <ChevronLeft size={"18"} /> Go back
-            </Link>
-          </CardFooter>
         </form>
       </Card>
     </div>

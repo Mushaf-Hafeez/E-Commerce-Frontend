@@ -30,7 +30,6 @@ const ForgotPasswordpage = () => {
     if (response.success) {
       reset();
       toast.success(response.message);
-      navigate("/reset-password");
     } else {
       toast.error(response.message);
     }

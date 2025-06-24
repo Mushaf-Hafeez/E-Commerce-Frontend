@@ -65,3 +65,14 @@ export const sendForgotPasswordLink = async (email) => {
     return error.response.data;
   }
 };
+
+// the reset password link function
+export const resetPassword = async (id, credentials) => {
+  try {
+    const { data } = await api.post(`/auth/resetPassword/${id}`, credentials);
+    return data;
+  } catch (error) {
+    console.log("Error in the reset password axios function: ", error.response);
+    return error.response.data;
+  }
+};

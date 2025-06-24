@@ -52,7 +52,7 @@ const Navbar = () => {
 
       {/* navlinks */}
       <div className="flex items-center gap-4">
-        <Link to={"/products"}>All Products</Link>
+        <Link to={"/products"}>Products</Link>
         <ToggleButton />
         {isAuthenticated ? (
           <div className="flex items-center gap-4">
@@ -61,12 +61,12 @@ const Navbar = () => {
             </Link>
             <div className="relative group">
               <Avatar className={"cursor-pointer"}>
-                <AvatarImage src={profilePic} />
+                <AvatarImage src={profilePic} className={"object-cover"} />
                 <AvatarFallback>
                   {name.slice(0, 1).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
-              <div className="absolute -left-5 py-2 bg-zinc-100 dark:bg-zinc-900 text-sm hidden group-hover:flex flex-col gap-1 items-start rounded-md shadow-md">
+              <div className="absolute -left-5 py-2 bg-zinc-100 dark:bg-zinc-900 text-sm hidden group-hover:flex flex-col items-start gap-1 rounded-md shadow-md">
                 <Link
                   className="px-2 py-1 hover:bg-zinc-200 dark:hover:bg-zinc-800"
                   to={"/dashboard"}
