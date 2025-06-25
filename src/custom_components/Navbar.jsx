@@ -60,18 +60,21 @@ const Navbar = () => {
               <ShoppingCart size={"18"} />
             </Link>
             <div className="relative group">
-              <Avatar className={"cursor-pointer"}>
+              <Avatar
+                onClick={() => navigate("/dashboard/profile")}
+                className={"cursor-pointer"}
+              >
                 <AvatarImage src={profilePic} className={"object-cover"} />
-                <AvatarFallback>
+                <AvatarFallback className={"bg-zinc-900 text-white"}>
                   {name.slice(0, 1).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
               <div className="absolute -left-5 py-2 bg-zinc-100 dark:bg-zinc-900 text-sm hidden group-hover:flex flex-col items-start gap-1 rounded-md shadow-md">
                 <Link
                   className="px-2 py-1 hover:bg-zinc-200 dark:hover:bg-zinc-800"
-                  to={"/dashboard"}
+                  to={"/dashboard/profile"}
                 >
-                  Dashboard
+                  Profile
                 </Link>
                 <button
                   className="w-full px-2 py-1 cursor-pointer hover:bg-zinc-200 dark:hover:bg-zinc-800"
