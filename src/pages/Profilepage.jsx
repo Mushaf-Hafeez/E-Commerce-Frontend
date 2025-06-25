@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 
 import { setName, setProfilePic } from "../redux/slices/profileSlice";
+import { updateProfile } from "../services/profile";
 
 const Profilepage = () => {
   const { name, email, profilePic, role } = useSelector(
@@ -20,26 +21,72 @@ const Profilepage = () => {
   const [newName, setNewName] = useState(name);
   const [newProfilePic, setNewProfilePic] = useState(profilePic);
 
+  // handle function to change the edit state
   const handleClick = () => {
     setEdit((prev) => !prev);
     document.getElementById("name").focus();
   };
 
+  // handle function to upload file
   const handleChange = (e) => {
-    const url = URL.createObjectURL(e.target.files[0]);
-    setNewProfilePic(url);
+    setNewProfilePic(e.target.files[0]);
   };
 
-  const handleSubmit = () => {
-    if (newName === "" && !newProfilePic) {
+  // handle function to update the data in state and the database
+  // const handleSubmit = async () => {
+  //   if (newName === "" && Object.keys(newProfilePic).length === 0) {
+  //     return toast.error("Invalid changes");
+  //   } else {
+  //     setEdit(false);
+  //     dispatch(setName(newName));
+  //     Object.keys(newProfilePic).length !== 0 &&
+  //       dispatch(setProfilePic(URL.createObjectURL(newProfilePic)));
+  //     localStorage.setItem("name", JSON.stringify(newName));
+  //     const formData = new FormData();
+  //     newName && formData.append("name", newName);
+  //     Object.keys(newProfilePic).length !== 0 &&
+  //       formData.append("profilePic", newProfilePic);
+  //     const response = await updateProfile(formData);
+  //     if (response.success) {
+  //       toast.success("Saved changes");
+  //     } else {
+  //       toast.error(response.message);
+  //     }
+  //   }
+  // };
+
+  // claude generated function
+  const handleSubmit = async () => {
+    // Check if there are any actual changes
+    if (newName === "" && !(newProfilePic instanceof File)) {
       return toast.error("Invalid changes");
     } else {
+      const toastId = toast.loading("loading...");
       setEdit(false);
       dispatch(setName(newName));
-      dispatch(setProfilePic(newProfilePic));
-      localStorage.setItem("name", JSON.stringify(newName));
-      localStorage.setItem("profilePic", JSON.stringify(newProfilePic));
-      toast.success("Saved changes");
+
+      // Only create object URL if newProfilePic is actually a File
+      if (newProfilePic instanceof File) {
+        dispatch(setProfilePic(URL.createObjectURL(newProfilePic)));
+      }
+
+      // Remove localStorage usage for Claude.ai compatibility
+      // localStorage.setItem("name", JSON.stringify(newName));
+
+      const formData = new FormData();
+      newName && formData.append("name", newName);
+
+      // Only append file if it's actually a File object
+      if (newProfilePic instanceof File) {
+        formData.append("profilePic", newProfilePic);
+      }
+
+      const response = await updateProfile(formData);
+      if (response.success) {
+        toast.success("Saved changes", { id: toastId });
+      } else {
+        toast.error(response.message);
+      }
     }
   };
 
