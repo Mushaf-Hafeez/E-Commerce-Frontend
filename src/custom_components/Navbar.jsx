@@ -56,7 +56,7 @@ const Navbar = () => {
         <ToggleButton />
         {isAuthenticated ? (
           <div className="flex items-center gap-4">
-            <Link to={"/addToCart"}>
+            <Link to={"/cart"}>
               <ShoppingCart size={"18"} />
             </Link>
             <div className="relative group">
