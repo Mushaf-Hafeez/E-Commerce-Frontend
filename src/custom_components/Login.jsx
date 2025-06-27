@@ -12,6 +12,7 @@ import {
   setProfilePic,
   setRole,
 } from "../redux/slices/profileSlice";
+import { setCart } from "../redux/slices/cartSlice";
 import { useDispatch } from "react-redux";
 import { login } from "../services/auth";
 import toast from "react-hot-toast";
@@ -30,12 +31,14 @@ const Login = () => {
   //   onSubmit function
   const onSubmit = async (data) => {
     const response = await login(data);
+    console.log("response is: ", response);
     if (response.success) {
       dispatch(setIsAuthenticated(response.success));
       dispatch(setName(response.user.name));
       dispatch(setEmail(response.user.email));
       dispatch(setProfilePic(response.user?.profilePic));
       dispatch(setRole(response.user.role));
+      dispatch(setCart(response.user.addToCart));
       localStorage.setItem("isAuthenticated", JSON.stringify(response.success));
       localStorage.setItem("name", JSON.stringify(response.user.name));
       localStorage.setItem("email", JSON.stringify(response.user.email));

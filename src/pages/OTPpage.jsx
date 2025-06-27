@@ -24,6 +24,7 @@ import {
   setProfilePic,
   setRole,
 } from "../redux/slices/profileSlice";
+import { setCart } from "../redux/slices/cartSlice";
 
 const OTP = () => {
   const { signupData } = useSelector((state) => state.auth);
@@ -47,6 +48,7 @@ const OTP = () => {
       dispatch(setName(response.user.name));
       dispatch(setEmail(response.user.email));
       dispatch(setRole(response.user.role));
+      dispatch(setCart(response.user.addToCart));
       localStorage.setItem("isAuthenticated", JSON.stringify(response.success));
       localStorage.setItem("name", JSON.stringify(response.user.name));
       localStorage.setItem("email", JSON.stringify(response.user.email));
