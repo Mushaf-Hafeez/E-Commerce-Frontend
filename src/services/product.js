@@ -1,5 +1,16 @@
 import { api } from "./auth";
 
+// get all products function
+export const products = async () => {
+  try {
+    const { data } = await api.get("/product/products");
+    return data;
+  } catch (error) {
+    console.log("Error in the products axios funtion: ", error.response);
+    return error.response.data;
+  }
+};
+
 // the add product function
 export const addProduct = async (product) => {
   try {
