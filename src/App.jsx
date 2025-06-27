@@ -14,6 +14,8 @@ import ProtectedRoutepage from "./pages/ProtectedRoute";
 import Dashboardpage from "./pages/Dashboardpage";
 import Profilepage from "./pages/Profilepage";
 import AddProductpage from "./pages/AddProductpage";
+import Unauthorizedpage from "./pages/Unauthorizedpage";
+import ProductListpage from "./pages/ProductListpage";
 
 const App = () => {
   return (
@@ -69,7 +71,16 @@ const App = () => {
               </ProtectedRoutepage>
             }
           />
+          <Route
+            path="product-list"
+            element={
+              <ProtectedRoutepage>
+                <ProductListpage />
+              </ProtectedRoutepage>
+            }
+          />
         </Route>
+        <Route path="/unauthorized" element={<Unauthorizedpage />} />
         <Route path="*" element={<Errorpage />} />
       </Routes>
     </main>

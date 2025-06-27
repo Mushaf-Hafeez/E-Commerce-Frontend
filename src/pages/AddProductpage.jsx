@@ -13,10 +13,12 @@ import toast from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { Controller, useForm } from "react-hook-form";
 import { CircleX, Upload } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { addProduct } from "../services/product";
+import { useNavigate } from "react-router-dom";
 
 const AddProductpage = () => {
+  const { role } = useSelector((state) => state.profile);
   const [images, setImages] = useState([]);
   const {
     register,
@@ -32,6 +34,7 @@ const AddProductpage = () => {
       price: "",
     },
   });
+  const navigate = useNavigate();
 
   const removeImage = (name) => {
     setImages(images.filter((image) => image.name !== name));
@@ -63,6 +66,12 @@ const AddProductpage = () => {
       toast.error(response.message, { id: toastId });
     }
   };
+
+  useEffect(() => {
+    if (role !== "seller") {
+      navigate("/unauthorized");
+    }
+  }, []);
 
   return (
     <div className="min-h-full w-full px-2 flex flex-col gap-2">
