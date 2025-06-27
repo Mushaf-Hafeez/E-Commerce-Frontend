@@ -49,6 +49,7 @@ const Login = () => {
         );
       }
       localStorage.setItem("role", JSON.stringify(response.user.role));
+      localStorage.setItem("cart", JSON.stringify(response.user.addToCart));
       reset();
       toast.success(response.message);
       navigate("/");

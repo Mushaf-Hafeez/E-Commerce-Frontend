@@ -53,6 +53,7 @@ const OTP = () => {
       localStorage.setItem("name", JSON.stringify(response.user.name));
       localStorage.setItem("email", JSON.stringify(response.user.email));
       localStorage.setItem("role", JSON.stringify(response.user.role));
+      localStorage.setItem("cart", JSON.stringify(response.user.addToCart));
       toast.success(response.message);
       navigate("/");
     } else {

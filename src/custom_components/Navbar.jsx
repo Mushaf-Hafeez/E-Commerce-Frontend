@@ -18,6 +18,7 @@ import {
 const Navbar = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
   const { name, profilePic } = useSelector((state) => state.profile);
+  const { cartlist } = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,7 +27,6 @@ const Navbar = () => {
   const handleClick = async () => {
     const response = await logout();
     if (response.success) {
-      console.log(response);
       localStorage.clear();
       dispatch(setIsAuthenticated(null));
       dispatch(setName(null));
@@ -56,7 +56,10 @@ const Navbar = () => {
         <ToggleButton />
         {isAuthenticated ? (
           <div className="flex items-center gap-4">
-            <Link to={"/cart"}>
+            <Link to={"/cart"} className="relative">
+              <span className="absolute -top-4 left-2 bg-primary rounded-full px-2 py-0.5 animate-bounce text-[10px]">
+                {cartlist.length}
+              </span>
               <ShoppingCart size={"18"} />
             </Link>
             <div className="relative group">
