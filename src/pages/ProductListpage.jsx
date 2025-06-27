@@ -12,7 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "../components/ui/table";
-import { myProducts } from "../services/product";
+import { myProducts, updateStock } from "../services/product";
 
 const ProductListpage = () => {
   const [products, setProducts] = useState([]);
@@ -29,7 +29,7 @@ const ProductListpage = () => {
     return;
   };
 
-  const toggleStock = (id) => {
+  const toggleStock = async (id) => {
     setProducts(
       products.map((product) =>
         product._id === id
@@ -40,6 +40,12 @@ const ProductListpage = () => {
           : product
       )
     );
+    const response = await updateStock(id);
+    if (response.success) {
+      toast.success(response.message);
+    } else {
+      toast.error(response.message);
+    }
   };
 
   useEffect(() => {

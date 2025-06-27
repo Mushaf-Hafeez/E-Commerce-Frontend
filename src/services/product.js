@@ -21,3 +21,14 @@ export const myProducts = async () => {
     return error.response.data;
   }
 };
+
+// the my product function
+export const updateStock = async (productId) => {
+  try {
+    const { data } = await api.put(`/product/updateStock/${productId}`);
+    return data;
+  } catch (error) {
+    console.log("Error in the my products axios function: ", error.response);
+    return error.response.data;
+  }
+};
