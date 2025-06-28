@@ -22,31 +22,7 @@ const Product = ({ item }) => {
   const { cartlist } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  // function to add product
-  const add = async () => {
-    const response = await addToCart(item._id);
-    if (response.success) {
-      dispatch(addProductToCart(response.cartItem));
-      localStorage.setItem("cart", JSON.stringify(cartlist));
-      toast.success(response.message);
-    } else {
-      toast.error(response.message);
-    }
-  };
-
-  // function to remove product
-  // const remove = async () => {
-  //   const response = await removeFromCart(item._id);
-  //   if (response.success) {
-  //     if (response.cartItem) {
-  //       dispatch(removeFromCart(response.cartItem));
-  //       localStorage.setItem("cart", JSON.stringify(cartlist));
-  //       toast.success(response.message);
-  //     }
-  //   } else {
-  //     toast.error(response.message);
-  //   }
-  // };
+  // Todo: add and remove from the cart
 
   useEffect(() => {
     const index = cartlist.findIndex(
@@ -84,14 +60,12 @@ const Product = ({ item }) => {
             <Button className={"rounded-[0px]"} size={"icon"}>
               {cartlist[index]?.quantity}
             </Button>
-            <Button className={"rounded-[0px]"} onClick={add} size={"icon"}>
+            <Button className={"rounded-[0px]"} size={"icon"}>
               +
             </Button>
           </div>
         ) : (
-          <Button onClick={add} className={"cursor-pointer"}>
-            Add
-          </Button>
+          <Button className={"cursor-pointer"}>Add</Button>
         )}
       </CardFooter>
     </Card>
