@@ -29,9 +29,11 @@ const Cartpage = () => {
       <div className="h-full w-full flex flex-col items-center md:flex-row md:justify-between gap-2">
         <Table>
           <TableHeader className={"border-b border-zinc-700"}>
-            <TableHead>Product Details</TableHead>
-            <TableHead>Subtotal</TableHead>
-            <TableHead>Action</TableHead>
+            <TableRow>
+              <TableHead>Product Details</TableHead>
+              <TableHead>Subtotal</TableHead>
+              <TableHead>Action</TableHead>
+            </TableRow>
           </TableHeader>
           <TableBody>
             {cartlist &&

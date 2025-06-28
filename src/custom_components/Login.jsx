@@ -31,7 +31,6 @@ const Login = () => {
   //   onSubmit function
   const onSubmit = async (data) => {
     const response = await login(data);
-    console.log("response is: ", response);
     if (response.success) {
       dispatch(setIsAuthenticated(response.success));
       dispatch(setName(response.user.name));

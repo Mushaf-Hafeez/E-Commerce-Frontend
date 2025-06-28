@@ -61,10 +61,12 @@ const ProductListpage = () => {
       <h2 className="text-2xl font-semibold">product List</h2>
       <Table className={"rounded-md text-bllack dark:text-white"}>
         <TableHeader className={"border-b border-zinc-700"}>
-          <TableHead>Product</TableHead>
-          <TableHead>Category</TableHead>
-          <TableHead>Price</TableHead>
-          <TableHead className={"text-right"}>Stock</TableHead>
+          <TableRow>
+            <TableHead>Product</TableHead>
+            <TableHead>Category</TableHead>
+            <TableHead>Price</TableHead>
+            <TableHead className={"text-right"}>Stock</TableHead>
+          </TableRow>
         </TableHeader>
         <TableBody>
           {products &&
