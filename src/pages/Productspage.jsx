@@ -60,8 +60,8 @@ const Productspage = () => {
             "No product"
           ) : (
             <div className="h-full w-full grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-              {filteredProducts.map((item) => (
-                <Product item={item} key={item._id} />
+              {filteredProducts.map((item, index) => (
+                <Product item={item} key={index} />
               ))}
             </div>
           )}

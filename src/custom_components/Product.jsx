@@ -7,30 +7,41 @@ import {
   CardAction,
 } from "../components/ui/card";
 import { Button } from "../components/ui/button";
-import { ToggleGroup } from "../components/ui/toggle-group";
 
 import { Star } from "lucide-react";
 import { addToCart, removeFromCart } from "../services/cart";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { addProductToCart } from "../redux/slices/cartSlice";
+import {
+  addProductToCart,
+  removeProductFromCart,
+} from "../redux/slices/cartSlice";
 import { useEffect, useState } from "react";
 
 const Product = ({ item }) => {
-  const [index, setIndex] = useState();
-
+  const [index, setIndex] = useState(-1);
   const { cartlist } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  // Todo: add and remove from the cart
+  // add product to cart
+  const add = async () => {
+    dispatch(addProductToCart({ productId: item }));
+  };
+
+  // remove product from cart
+  const remove = async () => {
+    dispatch(removeProductFromCart({ productId: item, setIndex }));
+  };
 
   useEffect(() => {
-    const index = cartlist.findIndex(
-      (cartItem) => cartItem.productId._id === item._id
-    );
-    setIndex(index);
-  }, [cartlist]);
+    const index = cartlist.findIndex((i) => i.productId._id === item._id);
+    if (index !== -1) {
+      setIndex(index);
+    }
+    localStorage.setItem("cart", JSON.stringify(cartlist));
+  }, [cartlist, add, remove]);
 
+  // Todo: add and remove api calls
   return (
     <Card className="flex flex-col gap-2 shadow-xl">
       <img
@@ -52,20 +63,22 @@ const Product = ({ item }) => {
       </CardContent>
       <CardFooter className={"flex items-center justify-between px-2"}>
         <h3 className="text-primary text-xl font-semibold">Rs {item.price}</h3>
-        {index !== -1 ? (
+        {index === -1 ? (
+          <Button onClick={add} className={"cursor-pointer"}>
+            Add
+          </Button>
+        ) : (
           <div className="flex items-center rounded-md overflow-hidden">
-            <Button className={"rounded-[0px]"} size={"icon"}>
+            <Button onClick={remove} className={"rounded-[0px]"} size={"icon"}>
               -
             </Button>
             <Button className={"rounded-[0px]"} size={"icon"}>
               {cartlist[index]?.quantity}
             </Button>
-            <Button className={"rounded-[0px]"} size={"icon"}>
+            <Button onClick={add} className={"rounded-[0px]"} size={"icon"}>
               +
             </Button>
           </div>
-        ) : (
-          <Button className={"cursor-pointer"}>Add</Button>
         )}
       </CardFooter>
     </Card>

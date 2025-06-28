@@ -71,11 +71,8 @@ const ProductListpage = () => {
         <TableBody>
           {products &&
             products.length > 0 &&
-            products.map((product) => (
-              <TableRow
-                key={product._id}
-                className={"border-b border-zinc-700"}
-              >
+            products.map((product, index) => (
+              <TableRow key={index} className={"border-b border-zinc-700"}>
                 <TableCell>
                   <img
                     className="size-20 object-cover rounded-md"
