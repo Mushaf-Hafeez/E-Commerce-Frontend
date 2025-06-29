@@ -26,13 +26,19 @@ const Signup = () => {
     control,
     formState: { errors },
     reset,
+    watch,
   } = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   //   onSubmit function
   const onSubmit = async (data) => {
-    // console.log("login data is: ", data);
+    if (!watch("role")) {
+      return toast.error("Select a role");
+    }
+    if (watch("password") !== watch("confirmPassword")) {
+      return toast.error("Passwords are not same");
+    }
     dispatch(setSignupData(data));
     const response = await sendOTP(data.email);
     if (response.success) {
@@ -93,7 +99,6 @@ const Signup = () => {
               <Controller
                 name="role"
                 control={control}
-                rules={{ required: true }}
                 render={({ field }) => (
                   <Select onValueChange={field.onChange} value={field.value}>
                     <SelectTrigger className="w-[90px]">

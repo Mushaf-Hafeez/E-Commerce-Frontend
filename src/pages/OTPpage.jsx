@@ -86,7 +86,7 @@ const OTP = () => {
         </CardContent>
         <CardFooter>
           <Button className={"w-full"} onClick={handleClick}>
-            Send OTP
+            Verify
           </Button>
         </CardFooter>
       </Card>
