@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "../components/ui/avatar";
 import { useDispatch, useSelector } from "react-redux";
-import { CloudLightning, ShoppingCart } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { ToggleButton } from "./ToggleButton";
 import { logout } from "../services/auth";
 import toast from "react-hot-toast";
@@ -57,9 +57,11 @@ const Navbar = () => {
         {isAuthenticated ? (
           <div className="flex items-center gap-4">
             <Link to={"/cart"} className="relative">
-              <span className="absolute -top-4 left-2 bg-primary rounded-full px-2 py-0.5 animate-bounce text-[10px]">
-                {cartlist.reduce((acc, item) => acc + item.quantity, 0)}
-              </span>
+              {cartlist && cartlist.length > 0 && (
+                <span className="absolute -top-4 left-2 bg-primary rounded-full px-2 py-0.5 animate-bounce text-[10px]">
+                  {cartlist.reduce((acc, item) => acc + item.quantity, 0)}
+                </span>
+              )}
               <ShoppingCart size={"18"} />
             </Link>
             <div className="relative group">

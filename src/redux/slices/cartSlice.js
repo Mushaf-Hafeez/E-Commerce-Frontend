@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { LucideChartGantt } from "lucide-react";
 import toast from "react-hot-toast";
 
 const initialState = {
@@ -17,6 +16,9 @@ export const cartSlice = createSlice({
     },
     addProductToCart: (state, action) => {
       const { productId } = action.payload;
+      if (!Array.isArray(state.cartlist)) {
+        state.cartlist = [];
+      }
       const index = state.cartlist.findIndex(
         (item) => item.productId._id === productId._id
       );
@@ -42,9 +44,11 @@ export const cartSlice = createSlice({
       } else {
         if (state.cartlist[index].quantity === 1) {
           state.cartlist = state.cartlist.filter(
-            (item) => item.productId._id !== state.cartlist[index].productId._id
+            (item) => item.productId._id !== productId._id
           );
-          setIndex(-1);
+          if (setIndex) {
+            setIndex(-1);
+          }
         } else {
           state.cartlist[index].amount -= productId.price;
           state.cartlist[index].quantity -= 1;

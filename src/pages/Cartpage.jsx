@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   Table,
@@ -9,15 +9,24 @@ import {
   TableCell,
 } from "../components/ui/table";
 import { CircleX } from "lucide-react";
+import { removeProductFromCart } from "../redux/slices/cartSlice";
+import { removeFromCart } from "../services/cart";
+import toast from "react-hot-toast";
 
 const Cartpage = () => {
   const { cartlist } = useSelector((state) => state.cart);
-
-  // console.log("cartlist is: ", cartlist);
+  const dispatch = useDispatch();
 
   // Todo: implement onclick functionality
-  const handleClick = (id) => {
-    console.log("item deleted: ", id);
+  const remove = async (productId) => {
+    dispatch(removeProductFromCart({ productId }));
+    localStorage.setItem("cart", JSON.stringify(cartlist));
+    const response = await removeFromCart(productId._id);
+    if (response.success) {
+      toast.success(response.message);
+    } else {
+      toast.error(response.message);
+    }
   };
 
   return (
@@ -38,8 +47,8 @@ const Cartpage = () => {
           <TableBody>
             {cartlist &&
               cartlist.length > 0 &&
-              cartlist.map((item) => (
-                <TableRow key={item._id} className={"border-b border-zinc-700"}>
+              cartlist.map((item, index) => (
+                <TableRow key={index} className={"border-b border-zinc-700"}>
                   <TableCell className={"flex gap-2"}>
                     <img
                       src={item.productId.productImages[0]}
@@ -58,7 +67,7 @@ const Cartpage = () => {
                   <TableCell>{item.amount}</TableCell>
                   <TableCell>
                     <CircleX
-                      onClick={() => handleClick(item._id)}
+                      onClick={() => remove(item.productId)}
                       color="red"
                       className="cursor-pointer"
                     />

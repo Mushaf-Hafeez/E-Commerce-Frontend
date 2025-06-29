@@ -26,18 +26,45 @@ const Product = ({ item }) => {
   // add product to cart
   const add = async () => {
     dispatch(addProductToCart({ productId: item }));
+    const response = await addToCart(item._id);
+    if (response.success) {
+      toast.success(response.message);
+    } else {
+      dispatch(removeFromCart({ productId: item }));
+      toast.error(response.message);
+    }
   };
 
   // remove product from cart
   const remove = async () => {
     dispatch(removeProductFromCart({ productId: item, setIndex }));
+    const response = await removeFromCart(item._id);
+    if (response.success) {
+      toast.success(response.message);
+    } else {
+      dispatch(addToCart({ productId: item }));
+      toast.error(response.message);
+    }
   };
 
   useEffect(() => {
-    const index = cartlist.findIndex((i) => i.productId._id === item._id);
-    if (index !== -1) {
-      setIndex(index);
+    // const index =
+    //   cartlist &&
+    //   cartlist.length > 0 &&
+    //   cartlist.findIndex((i) => i.productId._id === item._id);
+    // if (index !== -1) {
+    //   setIndex(index);
+    // }
+
+    if (cartlist && cartlist.length > 0) {
+      const foundIndex = cartlist.findIndex(
+        (i) => i.productId._id === item._id
+      );
+      setIndex(foundIndex);
+    } else {
+      setIndex(-1);
     }
+
     localStorage.setItem("cart", JSON.stringify(cartlist));
   }, [cartlist, add, remove]);
 
