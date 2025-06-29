@@ -115,7 +115,7 @@ const AddProductpage = () => {
             cols={24}
             rows={5}
             placeholder="Enter description here"
-            className="bg-zinc-900 rounded-md p-2 outline-primary"
+            className="dark:bg-zinc-900 rounded-md p-2 outline-primary"
           />
           {errors.description && (
             <p className="text-red-500 text-sm">{errors.description.message}</p>
@@ -170,7 +170,7 @@ const AddProductpage = () => {
         <div className="flex flex-col gap-2">
           <Label
             htmlFor="images"
-            className="flex flex-col gap-2 bg-zinc-900 p-2 rounded-md cursor-pointer outline-2 outline-zinc-800 hover:bg-zinc-800 transition-colors"
+            className="flex flex-col gap-2 text-zinc-500 dark:bg-zinc-900 p-2 rounded-md cursor-pointer outline-2 outline-zinc-200 dark:outline-zinc-800 dark:hover:bg-zinc-800 transition-colors"
           >
             <Upload size={18} />
             <span className="text-xs">Upload</span>
@@ -204,7 +204,9 @@ const AddProductpage = () => {
               </div>
             ))}
           {images.length === 0 && (
-            <span className="text-red-500 text-sm">Images are required</span>
+            <span className="text-sm text-red-700">
+              <b>NOTE: </b>Images are required
+            </span>
           )}
         </div>
         <Button type="submit" className="cursor-pointer">
