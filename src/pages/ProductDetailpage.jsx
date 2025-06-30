@@ -46,7 +46,7 @@ const ProductDetailpage = () => {
           <div className="flex items-center gap-1 text-xs md:text-sm whitespace-nowrap">
             <Link to={"/"}>Home /</Link>
             <Link to="/products">Products /</Link>
-            <Link to={`/products /${cartlist[index].productId.category}`}>
+            <Link to={`/products/${cartlist[index].productId.category}`}>
               {cartlist[index].productId.category} /
             </Link>
             <p className="text-primary">{cartlist[index].productId.name}</p>

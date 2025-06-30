@@ -43,3 +43,17 @@ export const updateStock = async (productId) => {
     return error.response.data;
   }
 };
+
+// the get products by category function
+export const getProductsByCategory = async (category) => {
+  try {
+    const { data } = await api.get(`/product/products/${category}`);
+    return data;
+  } catch (error) {
+    console.log(
+      "Error in the get products by category axion function: ",
+      error.response
+    );
+    return error.response.data;
+  }
+};
