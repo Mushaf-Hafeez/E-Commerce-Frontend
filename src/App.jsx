@@ -16,6 +16,8 @@ import Profilepage from "./pages/Profilepage";
 import AddProductpage from "./pages/AddProductpage";
 import Unauthorizedpage from "./pages/Unauthorizedpage";
 import ProductListpage from "./pages/ProductListpage";
+import ProductDetailpage from "./pages/ProductDetailpage";
+import Categorypage from "./pages/Categorypage";
 
 const App = () => {
   return (
@@ -25,12 +27,14 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/products" element={<Productspage />} />
         <Route path="/login" element={<Authpage />} />
         <Route path="/signup" element={<Authpage />} />
         <Route path="/otp-verification" element={<OTPpage />} />
         <Route path="/forgot-password" element={<ForgotPasswordpage />} />
         <Route path="/reset-password/:id" element={<ResetPasswordpage />} />
+        <Route path="/products" element={<Productspage />} />
+        <Route path="/products/product/:id" element={<ProductDetailpage />} />
+        <Route path="/products/:category" element={<Categorypage />} />
         <Route
           path="/cart"
           element={

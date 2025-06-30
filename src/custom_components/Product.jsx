@@ -70,7 +70,10 @@ const Product = ({ item }) => {
 
   // Todo: add and remove api calls
   return (
-    <Card className="flex flex-col gap-2 shadow-xl">
+    <Card
+      className="flex flex-col gap-2 shadow-xl"
+      onClick={() => navigate("/products/product/${item._id}")}
+    >
       <img
         src={item.productImages[0]}
         alt="product image"
