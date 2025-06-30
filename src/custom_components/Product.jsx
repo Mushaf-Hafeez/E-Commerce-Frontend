@@ -16,15 +16,19 @@ import {
   addProductToCart,
   removeProductFromCart,
 } from "../redux/slices/cartSlice";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Product = ({ item }) => {
   const [index, setIndex] = useState(-1);
   const { cartlist } = useSelector((state) => state.cart);
+  const btnRef = useRef();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // add product to cart
-  const add = async () => {
+  const add = async (e) => {
+    e.stopPropagation();
     dispatch(addProductToCart({ productId: item }));
     const response = await addToCart(item._id);
     if (response.success) {
@@ -36,7 +40,8 @@ const Product = ({ item }) => {
   };
 
   // remove product from cart
-  const remove = async () => {
+  const remove = async (e) => {
+    e.stopPropagation();
     dispatch(removeProductFromCart({ productId: item, setIndex }));
     const response = await removeFromCart(item._id);
     if (response.success) {
@@ -45,6 +50,11 @@ const Product = ({ item }) => {
       dispatch(addToCart({ productId: item }));
       toast.error(response.message);
     }
+  };
+
+  // redirect function
+  const redirect = () => {
+    navigate(`/products/product/${item._id}`);
   };
 
   useEffect(() => {
@@ -67,13 +77,8 @@ const Product = ({ item }) => {
 
     localStorage.setItem("cart", JSON.stringify(cartlist));
   }, [cartlist, add, remove]);
-
-  // Todo: add and remove api calls
   return (
-    <Card
-      className="flex flex-col gap-2 shadow-xl"
-      onClick={() => navigate("/products/product/${item._id}")}
-    >
+    <Card className="flex flex-col gap-2 shadow-xl" onClick={redirect}>
       <img
         src={item.productImages[0]}
         alt="product image"
@@ -93,23 +98,29 @@ const Product = ({ item }) => {
       </CardContent>
       <CardFooter className={"flex items-center justify-between px-2"}>
         <h3 className="text-primary text-xl font-semibold">Rs {item.price}</h3>
-        {index === -1 ? (
-          <Button onClick={add} className={"cursor-pointer"}>
-            Add
-          </Button>
-        ) : (
-          <div className="flex items-center rounded-md overflow-hidden">
-            <Button onClick={remove} className={"rounded-[0px]"} size={"icon"}>
-              -
+        <div ref={btnRef}>
+          {index === -1 ? (
+            <Button onClick={add} className={"cursor-pointer"}>
+              Add
             </Button>
-            <Button className={"rounded-[0px]"} size={"icon"}>
-              {cartlist[index]?.quantity}
-            </Button>
-            <Button onClick={add} className={"rounded-[0px]"} size={"icon"}>
-              +
-            </Button>
-          </div>
-        )}
+          ) : (
+            <div className="flex items-center rounded-md overflow-hidden">
+              <Button
+                onClick={remove}
+                className={"rounded-[0px]"}
+                size={"icon"}
+              >
+                -
+              </Button>
+              <Button className={"rounded-[0px]"} size={"icon"}>
+                {cartlist[index]?.quantity}
+              </Button>
+              <Button onClick={add} className={"rounded-[0px]"} size={"icon"}>
+                +
+              </Button>
+            </div>
+          )}
+        </div>
       </CardFooter>
     </Card>
   );

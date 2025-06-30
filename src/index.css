@@ -20,6 +20,10 @@ input::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
 
+#product-images::-webkit-scrollbar {
+  display: hidden;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
