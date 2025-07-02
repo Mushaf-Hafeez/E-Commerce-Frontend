@@ -16,8 +16,14 @@ import { removeProductFromCart } from "../redux/slices/cartSlice";
 import { removeFromCart } from "../services/cart";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
+import { loadStripe } from "@stripe/stripe-js";
+import { placeOrder } from "../services/order";
+import { useState } from "react";
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const Cartpage = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -45,8 +51,17 @@ const Cartpage = () => {
     if (Object.keys(errors).length > 0) {
       return toast.error("All fields are requried");
     }
+    if (cartlist.length === 0) {
+      return toast.error("Please add the items in the cart");
+    }
+    setIsLoading(true);
+    const stripe = await stripePromise;
+    const response = await placeOrder(cartlist, data);
 
-    // call the api to place the order
+    setIsLoading(false);
+    if (response.url) {
+      window.location.href = response.url;
+    }
   };
 
   return (
@@ -113,7 +128,7 @@ const Cartpage = () => {
                 <Input
                   id="first-name"
                   type={"text"}
-                  placeHolder={"First name"}
+                  placeholder={"First name"}
                   {...register("firstName", { required: true })}
                 />
               </div>
@@ -122,7 +137,7 @@ const Cartpage = () => {
                 <Input
                   id="last-name"
                   type={"text"}
-                  placeHolder={"Last name"}
+                  placeholder={"Last name"}
                   {...register("lastName", { required: true })}
                 />
               </div>
@@ -133,7 +148,7 @@ const Cartpage = () => {
               <Input
                 id="email"
                 type={"email"}
-                placeHolder={"email"}
+                placeholder={"email"}
                 {...register("email", { required: true })}
               />
             </div>
@@ -143,7 +158,7 @@ const Cartpage = () => {
               <Input
                 id="street"
                 type={"text"}
-                placeHolder={"street"}
+                placeholder={"street"}
                 {...register("street", { required: true })}
               />
             </div>
@@ -154,7 +169,7 @@ const Cartpage = () => {
                 <Input
                   id="city"
                   type={"text"}
-                  placeHolder={"city"}
+                  placeholder={"city"}
                   {...register("city", { required: true })}
                 />
               </div>
@@ -164,7 +179,7 @@ const Cartpage = () => {
                 <Input
                   id="postal"
                   type={"number"}
-                  placeHolder={"Postal code"}
+                  placeholder={"Postal code"}
                   {...register("postal", { required: true, minLength: 5 })}
                 />
               </div>
@@ -176,7 +191,7 @@ const Cartpage = () => {
                 <Input
                   id="province"
                   type="text"
-                  placeHolder={"province"}
+                  placeholder={"province"}
                   {...register("province", { required: true })}
                 />
               </div>
@@ -186,7 +201,7 @@ const Cartpage = () => {
                 <Input
                   id="country"
                   type="text"
-                  placeHolder={"country"}
+                  placeholder={"country"}
                   {...register("country", { required: true })}
                 />
               </div>
@@ -197,12 +212,26 @@ const Cartpage = () => {
               <Input
                 id="email"
                 type={"number"}
-                placeHolder={"Phone number"}
+                placeholder={"Phone number"}
                 {...register("phone-number", { required: true, minLength: 11 })}
               />
             </div>
+            {cartlist && cartlist.length > 0 && (
+              <div className="flex my-2 items-center justify-between text-zinc-500 font-semibold">
+                <h3 className="text-xl">Total Amount:</h3>
+                <p>
+                  {cartlist.reduce((acc, item) => acc + item.amount, 0)} PKR
+                </p>
+              </div>
+            )}
             <Button type="submit" className={"cursor-pointer mt-2"}>
-              Place Order
+              {isLoading ? (
+                <span className="flex items-center gap-2">
+                  <Spinner /> Loading
+                </span>
+              ) : (
+                "Place Order"
+              )}
             </Button>
           </form>
         </div>

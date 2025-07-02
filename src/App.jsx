@@ -18,6 +18,8 @@ import Unauthorizedpage from "./pages/Unauthorizedpage";
 import ProductListpage from "./pages/ProductListpage";
 import ProductDetailpage from "./pages/ProductDetailpage";
 import Categorypage from "./pages/Categorypage";
+import Successpage from "./pages/Successpage";
+import Cancelpage from "./pages/Cancelpage";
 
 const App = () => {
   return (
@@ -35,6 +37,8 @@ const App = () => {
         <Route path="/products" element={<Productspage />} />
         <Route path="/products/product/:id" element={<ProductDetailpage />} />
         <Route path="/products/:category" element={<Categorypage />} />
+        <Route path="/payment/success" element={<Successpage />} />
+        <Route path="/payment/cancel" element={<Cancelpage />} />
         <Route
           path="/cart"
           element={
