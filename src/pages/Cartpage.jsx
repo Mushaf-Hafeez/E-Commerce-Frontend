@@ -11,6 +11,7 @@ import {
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
+import Spinner from "../custom_components/Spinner";
 import { CircleX } from "lucide-react";
 import { removeProductFromCart } from "../redux/slices/cartSlice";
 import { removeFromCart } from "../services/cart";
@@ -54,6 +55,9 @@ const Cartpage = () => {
     if (cartlist.length === 0) {
       return toast.error("Please add the items in the cart");
     }
+
+    console.log("address is: ", data);
+
     setIsLoading(true);
     const stripe = await stripePromise;
     const response = await placeOrder(cartlist, data);
@@ -180,7 +184,7 @@ const Cartpage = () => {
                   id="postal"
                   type={"number"}
                   placeholder={"Postal code"}
-                  {...register("postal", { required: true, minLength: 5 })}
+                  {...register("postalCode", { required: true, minLength: 5 })}
                 />
               </div>
             </div>
@@ -213,7 +217,7 @@ const Cartpage = () => {
                 id="email"
                 type={"number"}
                 placeholder={"Phone number"}
-                {...register("phone-number", { required: true, minLength: 11 })}
+                {...register("phoneNumber", { required: true, minLength: 11 })}
               />
             </div>
             {cartlist && cartlist.length > 0 && (
