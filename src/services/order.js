@@ -3,7 +3,7 @@ import { api } from "./auth";
 // place order function
 export const placeOrder = async (cartlist, address) => {
   try {
-    const { data } = await api.post("/order/place-order", {
+    const { data } = await api.post("/order/checkout", {
       cartlist,
       address,
     });

@@ -56,7 +56,7 @@ const Cartpage = () => {
       return toast.error("Please add the items in the cart");
     }
 
-    console.log("address is: ", data);
+    // console.log("address is: ", data);
 
     setIsLoading(true);
     const stripe = await stripePromise;
