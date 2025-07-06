@@ -6,9 +6,16 @@ import {
 } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { CircleCheck } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 
 const Successpage = () => {
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    console.log("session id: ", searchParams.get("session_id"));
+  }, []);
+
   return (
     <div className="w-full h-[90vh] flex items-center justify-center ">
       <Card className={"w-3/12"}>
