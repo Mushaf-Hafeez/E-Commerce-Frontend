@@ -13,3 +13,17 @@ export const placeOrder = async (cartlist, address) => {
     return error.response.data;
   }
 };
+
+// check payment status function
+export const checkPaymentStatus = async (sessionId) => {
+  try {
+    const { data } = await api.get(`/order/check-status/${sessionId}`);
+    return data;
+  } catch (error) {
+    console.log(
+      "Error in the check payment status axios function: ",
+      error.response
+    );
+    return error.response.data;
+  }
+};
