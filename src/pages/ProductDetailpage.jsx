@@ -27,6 +27,8 @@ const ProductDetailpage = () => {
     }
   };
 
+  // Todo: need to fetch single product from the database
+
   useEffect(() => {
     if (cartlist && cartlist.length > 0) {
       const foundedIndex = cartlist.findIndex(
