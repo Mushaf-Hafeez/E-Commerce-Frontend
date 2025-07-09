@@ -24,6 +24,8 @@ import { useState } from "react";
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const Cartpage = () => {
+  // Todo: fix the issue in the cartpage
+
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,

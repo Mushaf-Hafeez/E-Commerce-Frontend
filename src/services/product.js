@@ -57,3 +57,17 @@ export const getProductsByCategory = async (category) => {
     return error.response.data;
   }
 };
+
+// get single product details
+export const productDetails = async (id) => {
+  try {
+    const { data } = await api.get(`/product/product-details/${id}`);
+    return data;
+  } catch (error) {
+    console.log(
+      "Error in the product details axios function: ",
+      error.response
+    );
+    return error.response.data;
+  }
+};
