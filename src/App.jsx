@@ -21,6 +21,7 @@ import Categorypage from "./pages/Categorypage";
 import Successpage from "./pages/Successpage";
 import Cancelpage from "./pages/Cancelpage";
 import MyOrderspage from "./pages/MyOrderspage";
+import ReceivedOrderspage from "./pages/ReceivedOrderspage";
 
 const App = () => {
   return (
@@ -93,6 +94,14 @@ const App = () => {
             element={
               <ProtectedRoutepage>
                 <MyOrderspage />
+              </ProtectedRoutepage>
+            }
+          />
+          <Route
+            path="receivedOrders"
+            element={
+              <ProtectedRoutepage>
+                <ReceivedOrderspage />
               </ProtectedRoutepage>
             }
           />

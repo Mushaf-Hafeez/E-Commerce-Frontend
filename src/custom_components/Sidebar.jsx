@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import { CgProfile } from "react-icons/cg";
 import { VscDiffAdded } from "react-icons/vsc";
-import { LayoutList, ListOrdered } from "lucide-react";
+import { LayoutList, ListOrdered, Package } from "lucide-react";
 
 const Sidebar = () => {
   const { role } = useSelector((state) => state.profile);
@@ -65,6 +65,21 @@ const Sidebar = () => {
         >
           <LayoutList size={"28"} />
           <span className="hidden sm:block">Product List</span>
+        </NavLink>
+      )}
+      {role === "seller" && (
+        <NavLink
+          to={"/dashboard/receivedOrders"}
+          className={({ isActive }) =>
+            `flex items-center gap-2 justify-center sm:justify-start px-4 py-2 ${
+              isActive
+                ? "dark:bg-zinc-900 border-r-primary border-r-4"
+                : "border-none"
+            }`
+          }
+        >
+          <Package size={"28"} />
+          <span className="hidden sm:block">Received orders</span>
         </NavLink>
       )}
     </aside>

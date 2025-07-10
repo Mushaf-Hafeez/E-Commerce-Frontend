@@ -38,3 +38,17 @@ export const getMyOrders = async () => {
     return error.response.data;
   }
 };
+
+// get received orders function
+export const getReceivedOrders = async () => {
+  try {
+    const { data } = await api.get("/order/received-orders");
+    return data;
+  } catch (error) {
+    console.log(
+      "Error in get received orders axios function: ",
+      error.response
+    );
+    return error.response.data;
+  }
+};
