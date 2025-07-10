@@ -109,7 +109,7 @@ const ReceivedOrderspage = () => {
                         className="flex flex-col lg:flex-row lg:items-center lg:justify-between p-3 bg-gray-50 dark:bg-zinc-800 rounded-lg gap-4"
                       >
                         <div className="flex items-center gap-4">
-                          <div className="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0">
+                          <div className="w-16 h-16 bg-green-100 dark:bg-zinc-800 rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0">
                             <img
                               src={order.product.productImages[0]}
                               alt={order.product.name}

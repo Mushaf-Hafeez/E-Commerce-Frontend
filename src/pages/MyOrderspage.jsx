@@ -66,7 +66,7 @@ const MyOrderspage = () => {
                       >
                         {/* Left Part - Product Info */}
                         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                          <div className="w-20 h-20 bg-green-100 dark:bg-green-900 rounded-lg overflow-hidden flex items-center justify-center shrink-0">
+                          <div className="w-20 h-20 bg-green-100 dark:bg-zinc-800 rounded-lg overflow-hidden flex items-center justify-center shrink-0">
                             <img
                               src={subOrder.product.productImages[0]}
                               alt={subOrder.product.name}

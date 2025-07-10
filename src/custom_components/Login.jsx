@@ -30,6 +30,7 @@ const Login = () => {
 
   //   onSubmit function
   const onSubmit = async (data) => {
+    const toastId = toast.loading("Logging in...");
     const response = await login(data);
     if (response.success) {
       dispatch(setIsAuthenticated(response.success));
@@ -50,10 +51,10 @@ const Login = () => {
       localStorage.setItem("role", JSON.stringify(response.user.role));
       localStorage.setItem("cart", JSON.stringify(response.user.addToCart));
       reset();
-      toast.success(response.message);
+      toast.success(response.message, { id: toastId });
       navigate("/");
     } else {
-      toast.error(response.message);
+      toast.error(response.message, { id: toastId });
     }
   };
 

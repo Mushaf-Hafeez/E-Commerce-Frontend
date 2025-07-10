@@ -25,6 +25,7 @@ const Navbar = () => {
 
   // logout function
   const handleClick = async () => {
+    const toastId = toast.loading("Log out...");
     const response = await logout();
     if (response.success) {
       localStorage.clear();
@@ -33,10 +34,10 @@ const Navbar = () => {
       dispatch(setEmail(null));
       dispatch(setProfilePic(null));
       dispatch(setRole(null));
-      toast.success(response.message);
+      toast.success(response.message, { id: toastId });
       navigate("/");
     } else {
-      toast.error(response.message);
+      toast.error(response.message, { id: toastId });
     }
   };
 

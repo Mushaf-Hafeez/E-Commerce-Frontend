@@ -34,6 +34,7 @@ const OTP = () => {
 
   // handle click function
   const handleClick = async () => {
+    const toastId = toast.loading("Signing in...");
     const response = await signup({
       name: signupData.name,
       email: signupData.email,
@@ -54,10 +55,10 @@ const OTP = () => {
       localStorage.setItem("email", JSON.stringify(response.user.email));
       localStorage.setItem("role", JSON.stringify(response.user.role));
       localStorage.setItem("cart", JSON.stringify(response.user.addToCart));
-      toast.success(response.message);
+      toast.success(response.message, { id: toastId });
       navigate("/");
     } else {
-      toast.error(response.message);
+      toast.error(response.message, { id: toastId });
     }
   };
 
