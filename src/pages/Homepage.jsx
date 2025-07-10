@@ -8,9 +8,7 @@ const Homepage = () => {
   //   console.log("cart is: ", cartlist);
   // }, []);
 
-  return (
-    <div className="h-full w-full">{import.meta.env.VITE_BACKEND_URL}</div>
-  );
+  return <div className="h-full w-full">Homepage</div>;
 };
 
 export default Homepage;
