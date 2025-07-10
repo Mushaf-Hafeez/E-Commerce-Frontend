@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Star } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { addToCart, removeFromCart } from "../services/cart";
@@ -15,7 +15,9 @@ const ProductDetailpage = () => {
   const [loading, setLoading] = useState(true);
 
   const { cartlist } = useSelector((state) => state.cart);
+  const { isAuthenticated } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
 
   // Function to fetch single product from database
@@ -40,6 +42,10 @@ const ProductDetailpage = () => {
   // Add product to cart
   const add = async () => {
     if (!product) return;
+
+    if (!isAuthenticated) {
+      return navigate("/login");
+    }
 
     dispatch(addProductToCart({ productId: product }));
 

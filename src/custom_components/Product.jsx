@@ -22,6 +22,7 @@ import { useNavigate } from "react-router-dom";
 const Product = ({ item }) => {
   const [index, setIndex] = useState(-1);
   const { cartlist } = useSelector((state) => state.cart);
+  const { isAuthenticated } = useSelector((state) => state.auth);
   const btnRef = useRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,6 +30,11 @@ const Product = ({ item }) => {
   // add product to cart
   const add = async (e) => {
     e.stopPropagation();
+
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+
     dispatch(addProductToCart({ productId: item }));
     const response = await addToCart(item._id);
     if (response.success) {
@@ -58,14 +64,6 @@ const Product = ({ item }) => {
   };
 
   useEffect(() => {
-    // const index =
-    //   cartlist &&
-    //   cartlist.length > 0 &&
-    //   cartlist.findIndex((i) => i.productId._id === item._id);
-    // if (index !== -1) {
-    //   setIndex(index);
-    // }
-
     if (cartlist && cartlist.length > 0) {
       const foundIndex = cartlist.findIndex(
         (i) => i.productId._id === item._id
