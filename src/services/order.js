@@ -27,3 +27,14 @@ export const checkPaymentStatus = async (sessionId) => {
     return error.response.data;
   }
 };
+
+// get myOrders function
+export const getMyOrders = async () => {
+  try {
+    const { data } = await api.get("/order/orders");
+    return data;
+  } catch (error) {
+    console.log("Error in get my orders axios function: ", error.response);
+    return error.response.data;
+  }
+};

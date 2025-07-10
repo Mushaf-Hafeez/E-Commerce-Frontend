@@ -20,6 +20,7 @@ import ProductDetailpage from "./pages/ProductDetailpage";
 import Categorypage from "./pages/Categorypage";
 import Successpage from "./pages/Successpage";
 import Cancelpage from "./pages/Cancelpage";
+import MyOrderspage from "./pages/MyOrderspage";
 
 const App = () => {
   return (
@@ -84,6 +85,14 @@ const App = () => {
             element={
               <ProtectedRoutepage>
                 <ProductListpage />
+              </ProtectedRoutepage>
+            }
+          />
+          <Route
+            path="myOrders"
+            element={
+              <ProtectedRoutepage>
+                <MyOrderspage />
               </ProtectedRoutepage>
             }
           />
