@@ -1,15 +1,8 @@
-import { useSelector } from "react-redux";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
 const Homepage = () => {
-  const { cartlist } = useSelector((state) => state.cart);
-
-  // useEffect(() => {
-  //   console.log("cart is: ", cartlist);
-  // }, []);
-
   return (
     <section className="h-[90vh] w-full flex items-center justify-center">
       <div className="flex flex-col items-center justify-center gap-4">
