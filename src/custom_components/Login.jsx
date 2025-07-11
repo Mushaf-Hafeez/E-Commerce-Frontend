@@ -52,7 +52,7 @@ const Login = () => {
       localStorage.setItem("cart", JSON.stringify(response.user.addToCart));
       reset();
       toast.success(response.message, { id: toastId });
-      navigate("/");
+      navigate("/products");
     } else {
       toast.error(response.message, { id: toastId });
     }
