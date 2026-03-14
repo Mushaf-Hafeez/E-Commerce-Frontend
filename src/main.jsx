@@ -12,6 +12,7 @@ createRoot(document.getElementById("root")).render(
     <Provider store={store}>
       <BrowserRouter>
         <App />
+        <Analytics />
         <Toaster
           toastOptions={{
             className:
@@ -20,5 +21,5 @@ createRoot(document.getElementById("root")).render(
         />
       </BrowserRouter>
     </Provider>
-  </ThemeProvider>
+  </ThemeProvider>,
 );
