@@ -45,10 +45,7 @@ const Navbar = () => {
     <nav className="relative flex item-center justify-between px-8 md:px-16 lg:px-24 py-4 shadow-lg">
       {/* logo */}
       <h3 className="text-xl font-merinda font-semibold">
-        <Link to="/">
-          E<span className="text-primary">-</span>
-          Com
-        </Link>
+        <Link to="/">E- Com</Link>
       </h3>
 
       {/* navlinks */}
@@ -59,7 +56,7 @@ const Navbar = () => {
           <div className="flex items-center gap-4">
             <Link to={"/cart"} className="relative">
               {cartlist && cartlist.length > 0 && (
-                <span className="absolute -top-4 left-2 bg-primary rounded-full px-2 py-0.5 animate-bounce text-[10px]">
+                <span className="absolute -top-4 left-2 bg-black text-white dark:bg-white dark:text-black rounded-full px-2 py-0.5 animate-bounce text-[10px]">
                   {cartlist.reduce((acc, item) => acc + item.quantity, 0)}
                 </span>
               )}
@@ -75,7 +72,7 @@ const Navbar = () => {
                   {name.slice(0, 1).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
-              <div className="absolute -left-5 py-2 bg-zinc-100 dark:bg-zinc-900 text-sm hidden group-hover:flex flex-col items-start gap-1 rounded-md shadow-md">
+              <div className="absolute z-[100] -left-5 py-2 bg-zinc-100 dark:bg-zinc-900 text-sm hidden group-hover:flex flex-col items-start gap-1 rounded-md shadow-md">
                 <Link
                   className="px-2 py-1 hover:bg-zinc-200 dark:hover:bg-zinc-800"
                   to={"/dashboard/profile"}
