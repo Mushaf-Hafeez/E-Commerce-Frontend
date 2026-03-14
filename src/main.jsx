@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
 import { store } from "./redux/store/store.js";
 import { ThemeProvider } from "./components/theme-provider.jsx";
+import { Anlaytics } from "@vercel/analytics/react";
 
 createRoot(document.getElementById("root")).render(
   <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
