@@ -76,7 +76,7 @@ const ProductDetailpage = () => {
   useEffect(() => {
     if (cartlist && cartlist.length > 0 && product) {
       const foundInCart = cartlist.some(
-        (item) => item.productId._id === product._id
+        (item) => item.productId._id === product._id,
       );
     }
   }, [cartlist, product]);
@@ -143,12 +143,9 @@ const ProductDetailpage = () => {
               {Array(product.rating)
                 .fill("_")
                 .map((item, index) => (
-                  <Star
-                    key={index}
-                    className="text-primary"
-                    fill="#efb100"
-                    size={"18"}
-                  />
+                  <div key={index} className="text-yellow-500">
+                    ★
+                  </div>
                 ))}
               <span className="text-zinc-400">({product.rating})</span>
             </p>

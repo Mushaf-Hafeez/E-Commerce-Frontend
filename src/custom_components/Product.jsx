@@ -8,7 +8,6 @@ import {
 } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 
-import { Star } from "lucide-react";
 import { addToCart, removeFromCart } from "../services/cart";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
@@ -66,7 +65,7 @@ const Product = ({ item }) => {
   useEffect(() => {
     if (cartlist && cartlist.length > 0) {
       const foundIndex = cartlist.findIndex(
-        (i) => i.productId._id === item._id
+        (i) => i.productId._id === item._id,
       );
       setIndex(foundIndex);
     } else {
@@ -89,7 +88,9 @@ const Product = ({ item }) => {
           {Array(4)
             .fill("_")
             .map((_, index) => (
-              <Star key={index} size={"20"} strokeWidth={0} fill="#ffbd07" />
+              <div key={index} className="text-yellow-500">
+                ★
+              </div>
             ))}
           ({item.rating})
         </CardDescription>

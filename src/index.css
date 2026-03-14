@@ -65,7 +65,7 @@ input::-webkit-outer-spin-button {
 }
 
 /* here is the theme code */
-:root {
+/* :root {
   --radius: 0.65rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
@@ -132,6 +132,52 @@ input::-webkit-outer-spin-button {
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.554 0.135 66.442);
+} */
+
+/* Graphite / Professional Tech Theme */
+:root {
+  --radius: 0.65rem;
+  /* Light Mode: Clean White with subtle cool-gray borders */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.25 0.01 240); /* Deep Charcoal */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.25 0.01 240);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.25 0.01 240);
+  --primary: oklch(0.25 0.01 240); /* Primary is dark in light mode */
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.96 0.01 240);
+  --secondary-foreground: oklch(0.25 0.01 240);
+  --muted: oklch(0.96 0.01 240);
+  --muted-foreground: oklch(0.55 0.02 240);
+  --accent: oklch(0.96 0.01 240);
+  --accent-foreground: oklch(0.25 0.01 240);
+  --destructive: oklch(0.55 0.18 25);
+  --border: oklch(0.92 0.01 240);
+  --input: oklch(0.92 0.01 240);
+  --ring: oklch(0.25 0.01 240);
+}
+
+.dark {
+  /* Dark Mode: The "MX Graphite" Look */
+  --background: oklch(0.12 0.01 240); /* Pure Graphite Black */
+  --foreground: oklch(0.98 0.01 240); /* Off-white text */
+  --card: oklch(0.16 0.01 240);
+  --card-foreground: oklch(0.98 0.01 240);
+  --popover: oklch(0.16 0.01 240);
+  --popover-foreground: oklch(0.98 0.01 240);
+  --primary: oklch(0.98 0.01 240); /* Primary is light in dark mode */
+  --primary-foreground: oklch(0.12 0.01 240);
+  --secondary: oklch(0.22 0.02 240);
+  --secondary-foreground: oklch(0.98 0.01 240);
+  --muted: oklch(0.22 0.02 240);
+  --muted-foreground: oklch(0.65 0.02 240);
+  --accent: oklch(0.22 0.02 240);
+  --accent-foreground: oklch(0.98 0.01 240);
+  --destructive: oklch(0.55 0.18 25);
+  --border: oklch(1 0 0 / 12%); /* Faint white borders */
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.98 0.01 240);
 }
 
 @layer base {
