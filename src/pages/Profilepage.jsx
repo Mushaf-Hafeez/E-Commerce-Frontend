@@ -13,7 +13,7 @@ import { updateProfile } from "../services/profile";
 
 const Profilepage = () => {
   const { name, email, profilePic, role } = useSelector(
-    (state) => state.profile
+    (state) => state.profile,
   );
   const dispatch = useDispatch();
 
@@ -74,7 +74,7 @@ const Profilepage = () => {
         <Avatar className={"relative size-48 overflow-visible"}>
           <Label htmlFor={"image"} className={"absolute top-32 right-0 z-50"}>
             <Camera
-              className="size-12 bg-primary dark:text-black p-3 rounded-full cursor-pointer"
+              className="size-12 bg-secondary text-primary dark:bg-primary dark:text-secondary p-3 rounded-full cursor-pointer"
               size={"28"}
             />
           </Label>
