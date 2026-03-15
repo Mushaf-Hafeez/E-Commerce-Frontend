@@ -53,7 +53,7 @@ const ReceivedOrderspage = () => {
   }, {});
 
   return (
-    <div className="min-h-full w-full px-2 sm:px-4 lg:px-6 flex flex-col gap-2">
+    <div className="h-full w-full px-2 sm:px-4 lg:px-6 flex flex-col gap-2 overflow-y-auto">
       <h2 className="text-xl sm:text-2xl font-semibold">Received Orders</h2>
       {isLoading ? (
         <Spinner />

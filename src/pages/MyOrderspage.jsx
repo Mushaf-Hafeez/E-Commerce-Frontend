@@ -32,7 +32,7 @@ const MyOrderspage = () => {
   }, []);
 
   return (
-    <div className="min-h-full w-full px-2 md:px-6 lg:px-10 py-4 flex flex-col gap-4">
+    <div className="h-full w-full px-2 md:px-6 lg:px-10 py-4 flex flex-col gap-4 overflow-y-auto">
       <h2 className="text-xl sm:text-2xl font-semibold">My Orders</h2>
 
       {isLoading ? (

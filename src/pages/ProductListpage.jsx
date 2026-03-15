@@ -37,8 +37,8 @@ const ProductListpage = () => {
               ...product,
               inStock: !product.inStock,
             }
-          : product
-      )
+          : product,
+      ),
     );
     const response = await updateStock(id);
     if (response.success) {
@@ -57,7 +57,7 @@ const ProductListpage = () => {
   }, []);
 
   return (
-    <div className="min-h-full w-full px-2 flex flex-col gap-2">
+    <div className="h-full w-full px-2 flex flex-col gap-2 overflow-y-auto">
       <h2 className="text-2xl font-semibold">product List</h2>
       <Table className={"rounded-md text-bllack dark:text-white"}>
         <TableHeader className={"border-b border-zinc-700"}>
