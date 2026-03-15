@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "../components/ui/avatar";
 import { useDispatch, useSelector } from "react-redux";
@@ -50,7 +50,14 @@ const Navbar = () => {
 
       {/* navlinks */}
       <div className="flex items-center gap-4">
-        <Link to={"/products"}>Products</Link>
+        <NavLink
+          to={"/products"}
+          className={({ isActive }) =>
+            `${isActive ? "text-primary" : "text-primary/60"} hover:text-primary transition-colors duration-200`
+          }
+        >
+          Products
+        </NavLink>
         <ToggleButton />
         {isAuthenticated ? (
           <div className="flex items-center gap-4">
