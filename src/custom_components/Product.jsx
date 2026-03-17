@@ -76,7 +76,7 @@ const Product = ({ item }) => {
   }, [cartlist, add, remove]);
   return (
     <Card
-      className="flex flex-col gap-2 shadow-xl cursor-pointer"
+      className="flex flex-col gap-2 shadow-xl cursor-pointer hover:scale-105 duration-200"
       onClick={redirect}
     >
       <img
