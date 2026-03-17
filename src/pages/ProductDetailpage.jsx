@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Star } from "lucide-react";
+import { ArrowLeft, Star } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { addToCart, removeFromCart } from "../services/cart";
 import { addProductToCart } from "../redux/slices/cartSlice";
@@ -100,12 +100,19 @@ const ProductDetailpage = () => {
   return (
     <div className="min-h-[90vh] w-full px-8 md:px-16 lg:px-24">
       <div className="h-full w-full my-10 flex flex-col gap-2">
-        {/* breadcrumb */}
-        <div className="flex items-center gap-1 text-xs md:text-sm whitespace-nowrap">
-          <Link to={"/"}>Home /</Link>
-          <Link to="/products">Products /</Link>
-          <Link to={`/products/${product.category}`}>{product.category} /</Link>
-          <p className="text-primary">{product.name}</p>
+        <div className="flex items-center gap-4">
+          <Link to={-1} className="cursor-pointer">
+            <ArrowLeft size={18} />
+          </Link>
+          {/* breadcrumb */}
+          <div className="flex items-center gap-1 text-xs md:text-sm whitespace-nowrap">
+            <Link to={"/"}>Home /</Link>
+            <Link to="/products">Products /</Link>
+            <Link to={`/products/${product.category}`}>
+              {product.category} /
+            </Link>
+            <p className="text-primary">{product.name}</p>
+          </div>
         </div>
 
         {/* product */}
@@ -119,7 +126,7 @@ const ProductDetailpage = () => {
               {product.productImages?.map((image, imgIndex) => (
                 <img
                   onClick={() => setCurrentIndex(imgIndex)}
-                  className="size-24 object-cover border-2 border-zinc-300 dark:border-zinc-700 rounded cursor-pointer"
+                  className="size-24 object-contain bg-white border-2 border-zinc-300 dark:border-zinc-700 rounded cursor-pointer"
                   key={imgIndex}
                   src={image}
                   alt="product image"
@@ -127,8 +134,9 @@ const ProductDetailpage = () => {
               ))}
             </div>
             {/* current image will be displayed here */}
-            <div className="size-96 border-2 border-zinc-300 dark:border-zinc-700 rounded overflow-hidden flex items-center justify-center flex-wrap">
+            <div className="size-96 bg-white border-2 border-zinc-300 dark:border-zinc-700 rounded overflow-hidden flex items-center justify-center flex-wrap">
               <img
+                className="h-full object-contain bg-white"
                 src={product.productImages?.[currentIndex]}
                 alt="main image"
               />

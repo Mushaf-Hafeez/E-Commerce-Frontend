@@ -75,11 +75,14 @@ const Product = ({ item }) => {
     localStorage.setItem("cart", JSON.stringify(cartlist));
   }, [cartlist, add, remove]);
   return (
-    <Card className="flex flex-col gap-2 shadow-xl" onClick={redirect}>
+    <Card
+      className="flex flex-col gap-2 shadow-xl cursor-pointer"
+      onClick={redirect}
+    >
       <img
         src={item.productImages[0]}
         alt="product image"
-        className="h-52 object-cover"
+        className="h-52 object-contain bg-white"
       />
       <CardContent className={"px-2 space-y-1"}>
         <CardDescription>{item.category}</CardDescription>
