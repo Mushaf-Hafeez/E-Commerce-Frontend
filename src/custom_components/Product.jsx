@@ -80,6 +80,7 @@ const Product = ({ item }) => {
       onClick={redirect}
     >
       <img
+        loading="lazy"
         src={item.productImages[0]}
         alt="product image"
         className="h-52 object-contain bg-white"

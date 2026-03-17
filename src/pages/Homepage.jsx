@@ -47,6 +47,7 @@ const Homepage = () => {
       {/* Product Image with Gray Saturation Adjustment */}
       <div className="h-full absolute right-0 top-1/2 -translate-y-1/2 w-1/2 lg:block hidden">
         <img
+          loading="lazy"
           src="hero-img.png"
           alt="Logitech MX Master 3S"
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-3/4 brightness-90 grayscale-100 contrast-150 drop-shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:drop-shadow-[0_20px_50px_rgba(0,0,0,0.7)]"

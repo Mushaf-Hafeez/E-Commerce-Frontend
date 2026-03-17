@@ -125,6 +125,7 @@ const ProductDetailpage = () => {
             >
               {product.productImages?.map((image, imgIndex) => (
                 <img
+                  loading="lazy"
                   onClick={() => setCurrentIndex(imgIndex)}
                   className="size-24 object-contain bg-white border-2 border-zinc-300 dark:border-zinc-700 rounded cursor-pointer"
                   key={imgIndex}
@@ -136,6 +137,7 @@ const ProductDetailpage = () => {
             {/* current image will be displayed here */}
             <div className="size-96 bg-white border-2 border-zinc-300 dark:border-zinc-700 rounded overflow-hidden flex items-center justify-center flex-wrap">
               <img
+                loading="lazy"
                 className="h-full object-contain bg-white"
                 src={product.productImages?.[currentIndex]}
                 alt="main image"
