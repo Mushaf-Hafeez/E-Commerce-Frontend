@@ -57,55 +57,14 @@ const App = () => {
             </ProtectedRoutepage>
           }
         >
-          <Route
-            index
-            element={
-              <ProtectedRoutepage>
-                <Profilepage />
-              </ProtectedRoutepage>
-            }
-          />
-          <Route
-            path="profile"
-            element={
-              <ProtectedRoutepage>
-                <Profilepage />
-              </ProtectedRoutepage>
-            }
-          />
-          <Route
-            path="add-product"
-            element={
-              <ProtectedRoutepage>
-                <AddProductpage />
-              </ProtectedRoutepage>
-            }
-          />
-          <Route
-            path="product-list"
-            element={
-              <ProtectedRoutepage>
-                <ProductListpage />
-              </ProtectedRoutepage>
-            }
-          />
-          <Route
-            path="myOrders"
-            element={
-              <ProtectedRoutepage>
-                <MyOrderspage />
-              </ProtectedRoutepage>
-            }
-          />
-          <Route
-            path="receivedOrders"
-            element={
-              <ProtectedRoutepage>
-                <ReceivedOrderspage />
-              </ProtectedRoutepage>
-            }
-          />
+          <Route index element={<Profilepage />} />
+          <Route path="profile" element={<Profilepage />} />
+          <Route path="add-product" element={<AddProductpage />} />
+          <Route path="product-list" element={<ProductListpage />} />
+          <Route path="myOrders" element={<MyOrderspage />} />
+          <Route path="receivedOrders" element={<ReceivedOrderspage />} />
         </Route>
+
         <Route path="/unauthorized" element={<Unauthorizedpage />} />
         <Route path="*" element={<Errorpage />} />
       </Routes>

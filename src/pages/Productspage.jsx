@@ -7,12 +7,24 @@ import toast from "react-hot-toast";
 import { Card } from "../components/ui/card";
 import { Input } from "../components/ui/input";
 import Product from "../custom_components/Product";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Link, useNavigate } from "react-router-dom";
 
 const Productspage = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const fetchProducts = async () => {
     setIsLoading(true);
@@ -30,7 +42,7 @@ const Productspage = () => {
   useEffect(() => {
     if (search && search !== "") {
       const filtered = allProducts.filter((item) =>
-        item.name.toLowerCase().includes(search.toLowerCase())
+        item.name.toLowerCase().includes(search.toLowerCase()),
       );
       setFilteredProducts(filtered);
     } else {
@@ -45,13 +57,28 @@ const Productspage = () => {
   return (
     <div className="min-h-screen w-full flex flex-col gap-2 px-6 md:px-16 lg:px-24 py-5">
       <h2 className="text-2xl font-semibold">All Products</h2>
-      <Input
-        type="text"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className={"w-52"}
-        placeholder="Search products..."
-      />
+      <div className="flex items-center justify-between">
+        <Input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className={"w-52"}
+          placeholder="Search products..."
+        />
+        <Select onValueChange={(value) => navigate(`/products/${value}`)}>
+          <SelectTrigger className="w-full max-w-48">
+            <SelectValue placeholder="Select a category" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Categories</SelectLabel>
+              <SelectItem value="keyboard">Keyboard</SelectItem>
+              <SelectItem value="mouse">Mouse</SelectItem>
+              <SelectItem value="mousepad">Mousepad</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
       {isLoading ? (
         <Spinner />
       ) : (
